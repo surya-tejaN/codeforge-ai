@@ -85,13 +85,79 @@ walker CodeForge {
             "output": here.review
         };
 
-        print("\n✅ CodeForge pipeline complete!");
+        # 🛡️ AGENT 5: SECURITY (REAL AI via Backboard)
+        print("🛡️ [Security] Checking vulnerabilities...");
+        
+        security_input = "Analyze security risks and vulnerabilities in this system: " + here.architecture;
+        
+        result3 = subprocess.run(
+            ["python", "run_reviewer.py", security_input],
+            capture_output=True,
+            text=True
+        );
+        
+        security_output = result3.stdout.strip();
+
+        report {
+            "agent": "Security Agent (AI)",
+            "output": security_output
+        };
+
+        # 🐞 AGENT 6: DEBUGGER (REAL AI via Backboard)
+        print("🐞 [Debugger] Finding issues...");
+        
+        debug_input = "Find bugs and suggest improvements in this system: " + here.architecture;
+        
+        result4 = subprocess.run(
+            ["python", "run_reviewer.py", debug_input],
+            capture_output=True,
+            text=True
+        );
+        
+        debug_output = result4.stdout.strip();
+
+        report {
+            "agent": "Debugger Agent",
+            "output": debug_output
+        };
+
+        # 🗄️ AGENT 7: DATABASE ENGINEER (Structured)
+        print("🗄️ [Database] Designing schema...");
+        
+        database = {
+            "db": "MongoDB",
+            "collections": ["users", "transactions"],
+            "features": ["indexing", "scaling", "replication"],
+            "based_on": here.architecture
+        };
+
+        report {
+            "agent": "Database Engineer",
+            "output": database
+        };
+
+        # 🚀 AGENT 8: DEVOPS AGENT (Structured)
+        print("🚀 [DevOps] Preparing deployment...");
+        
+        devops = {
+            "deployment": "Kubernetes",
+            "tools": ["Docker", "CI/CD", "Monitoring"],
+            "platform": "Insforge-ready",
+            "based_on": here.architecture
+        };
+
+        report {
+            "agent": "DevOps Agent",
+            "output": devops
+        };
+
+        print("\n✅ AgentForge pipeline complete!");
     }
 }
 
 with entry {
     print("============================================================");
-    print("🚀 AgentForge AI - Multi-Agent System");
+    print("🚀 AgentForge AI - 8-Agent Multi-Agent System");
     print("============================================================\n");
     
     result = root spawn CodeForge();
