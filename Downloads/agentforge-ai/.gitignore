@@ -1,11 +1,15 @@
-.jac/
+# Python
 __pycache__/
-.vscode/
-__pycache__/
-.jac/
-.vscode/
-.env.env
+*.pyc
 
+# Environment
+.env
+
+# IDE
+.vscode/
+
+# JAC
+.jac/
 
 # InsForge & AI agent skills
 .insforge
