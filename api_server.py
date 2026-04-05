@@ -1,41 +1,35 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 import subprocess
 
 app = FastAPI()
 
-# ✅ CORS FIX (VERY IMPORTANT)
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-# ✅ ROOT (optional test)
+# Root endpoint
 @app.get("/")
 def home():
-    return {"message": "AgentForge AI backend running"}
+    return {"status": "AgentForge backend running"}
 
-# ✅ MAIN ENDPOINT (Lovable will call this)
-@app.get("/run")
-def run(prompt: str = "Build a fintech system"):
+# Main endpoint (USE POST ONLY)
+@app.post("/run")
+def run(data: dict):
     try:
-        # Run your JAC pipeline
+        prompt = data.get("prompt", "Build a system")
+
         result = subprocess.run(
             ["python3", "-m", "jaclang", "run", "main.jac", prompt],
             capture_output=True,
-            text=True
+            text=True,
+            timeout=20
         )
 
         output = result.stdout
 
         return {
+            "status": "success",
             "output": output
         }
 
     except Exception as e:
         return {
-            "output": f"Error: {str(e)}"
+            "status": "error",
+            "output": str(e)
         }
