@@ -1,7 +1,10 @@
 .jac/
 __pycache__/
 .vscode/
-.env
+__pycache__/
+.jac/
+.vscode/
+.env.env
 
 
 # InsForge & AI agent skills
