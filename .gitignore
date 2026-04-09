@@ -25,3 +25,7 @@ __pycache__/
 .roo
 .trae
 .windsurf
+venv310/
+venv312/
+agentforge-ai/
+*.log
