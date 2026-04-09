@@ -1,0 +1,5 @@
+*.jac linguist-language=JAC
+*.jac linguist-detectable=true
+*.py linguist-vendored=false
+venv*/** linguist-vendored=true
+agentforge-ai/** linguist-vendored=true
